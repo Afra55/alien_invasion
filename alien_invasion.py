@@ -1,5 +1,6 @@
-import sys
 import pygame
+
+import game_functions as gf
 from settings import Settings
 from ship import Ship
 
@@ -12,20 +13,12 @@ def run_game():
     screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
     pygame.display.set_caption("Afra55 game")
 
-    ship = Ship(screen)
+    ship = Ship(settings, screen)
 
     while True:
-
-        # 监视键盘和鼠标事件
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-
-            screen.fill(settings.bg_color)
-
-            ship.blitme()
-
-            pygame.display.flip()
+        gf.check_events(ship)
+        ship.update()
+        gf.update_screen(settings, screen, ship)
 
 
 run_game()
