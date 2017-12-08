@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Group
 
 import game_functions as gf
+from game_stats import GameStatus
 from settings import Settings
 from ship import Ship
 
@@ -13,6 +14,7 @@ def run_game():
     pygame.init()   # 初始化游戏并创建一个屏幕对象
     screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
     pygame.display.set_caption("Afra55 game")
+    stats = GameStatus(settings)
 
     ship = Ship(settings, screen)
 
@@ -25,8 +27,8 @@ def run_game():
     while True:
         gf.check_events(settings, screen, ship, bullets)
         ship.update()
-        gf.update_aliens(settings, aliens)
         gf.update_bullets(bullets, aliens, settings, screen, ship)
+        gf.update_aliens(settings, aliens, ship, stats, screen, bullets)
         gf.update_screen(settings, screen, ship, aliens, bullets)
 
 
