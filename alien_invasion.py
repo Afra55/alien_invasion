@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Group
 
 import game_functions as gf
+from button import Button
 from game_stats import GameStatus
 from settings import Settings
 from ship import Ship
@@ -16,6 +17,8 @@ def run_game():
     pygame.display.set_caption("Afra55 game")
     stats = GameStatus(settings)
 
+    play_button = Button(settings, screen, 'Play')
+
     ship = Ship(settings, screen)
 
     bullets = Group()
@@ -25,12 +28,14 @@ def run_game():
     gf.create_fleet(settings, screen, ship, aliens)
 
     while True:
-        gf.check_events(settings, screen, ship, bullets)
+        gf.check_events(settings, screen, ship, aliens, bullets, stats, play_button)
+
         if stats.game_active:
             ship.update()
             gf.update_bullets(bullets, aliens, settings, screen, ship)
             gf.update_aliens(settings, aliens, ship, stats, screen, bullets)
-            gf.update_screen(settings, screen, ship, aliens, bullets)
+
+        gf.update_screen(settings, screen, ship, aliens, bullets, stats, play_button)
 
 
 run_game()
