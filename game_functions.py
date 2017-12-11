@@ -77,6 +77,8 @@ def check_bullet_alien_collisions(ai_settings, stats, screen, ship, aliens, bull
             stats.score += ai_settings.alien_points
             sb.prep_score()
 
+        check_high_score(stats, sb)
+
     if len(aliens) == 0:
         bullets.empty()
         ai_settings.increase_speed()
@@ -170,3 +172,9 @@ def change_fleet_direction(ai_settings, aliens):
         alien.rect.y += ai_settings.fleet_drop_speed
 
     ai_settings.fleet_direction *= -1
+
+
+def check_high_score(stats, sb):
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prep_high_score()
