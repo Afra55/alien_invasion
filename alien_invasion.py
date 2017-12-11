@@ -31,7 +31,7 @@ def run_game():
     gf.create_fleet(settings, screen, ship, aliens)
 
     while True:
-        gf.check_events(settings, screen, ship, aliens, bullets, stats, play_button)
+        gf.check_events(settings, screen, ship, aliens, bullets, stats, play_button, sb)
 
         if stats.game_active:
             ship.update()
