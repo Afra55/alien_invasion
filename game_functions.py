@@ -32,6 +32,8 @@ def check_play_button(ai_settings, screen, stats, play_button, mouse_x, mouse_y,
         create_fleet(ai_settings, screen, ship, aliens)
         ship.center_ship()
 
+        pygame.mouse.set_visible(False)
+
 
 def check_key_down_events(event, ai_settings, screen, ship, bullets):
     if event.key == pygame.K_ESCAPE:
@@ -136,6 +138,7 @@ def ship_hit(ai_settings, aliens, ship, stats, screen, bullets):
         sleep(0.5)
     else:
         stats.game_active = False
+        pygame.mouse.set_visible(True)
 
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
